@@ -1,0 +1,30 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+
+# Django
+db.sqlite3
+*.log
+
+# Sanal Çevre
+venv/
+env/
+*.env
+
+# Media dosyaları (örneğin, yüklenen kullanıcı resimleri)
+media/
+
+# Çalışma zamanı dosyaları
+*.db
+*.sqlite3
+*.log
+
+# VS Code özel dosyaları
+.vscode/
+
+# PyCharm özel dosyaları
+.idea/
+
+# Jupyter Notebook özel dosyaları
+.ipynb_checkpoints/

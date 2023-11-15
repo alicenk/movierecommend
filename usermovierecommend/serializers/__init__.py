@@ -1,0 +1,1 @@
+from usermovierecommend.serializers.user_serializer import UserSerializer
