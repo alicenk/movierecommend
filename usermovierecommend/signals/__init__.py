@@ -1,0 +1,1 @@
+from usermovierecommend.signals.user_signals import after_user_creation
