@@ -1,0 +1,1 @@
+from usermovierecommend.elasticsearch.documents import UserDocument

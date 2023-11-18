@@ -82,6 +82,14 @@ WSGI_APPLICATION = 'movierecommend.wsgi.application'
 #     }
 # }
 
+
+ELASTICSEARCH_DSL = {
+    'user_index': {
+        'hosts': 'localhost:9200',
+    },
+}
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

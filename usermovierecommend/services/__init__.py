@@ -1,1 +1,2 @@
 from usermovierecommend.services.user_services import UserService
+from usermovierecommend.services.movie_services import MovieService
