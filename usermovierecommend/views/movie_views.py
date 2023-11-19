@@ -8,7 +8,7 @@ class MovieView(generics.CreateAPIView, generics.ListAPIView, generics.UpdateAPI
         movie_data = request.data
         created_movie_data = MovieService.create_movie(movie_data)
         return JsonResponse({
-            "message": "Movie Created",
+            "message": "Movie Creation Api",
             "movie_data": created_movie_data
         })
 

@@ -45,7 +45,7 @@ class MovieService:
         return None
 
     @classmethod
-    def delete_user(cls, movie_id):
+    def delete_movie(cls, movie_id):
         try:
             movie = Movie.objects.get(id=movie_id)
             movie.delete()

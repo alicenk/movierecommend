@@ -1,1 +1,2 @@
 from usermovierecommend.elasticsearch.documents import UserDocument
+from usermovierecommend.elasticsearch.documents import MovieDocument

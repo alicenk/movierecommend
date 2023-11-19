@@ -1,1 +1,4 @@
 from usermovierecommend.signals.user_signals import after_user_creation
+from usermovierecommend.signals.user_signals import before_user_deleted
+from usermovierecommend.signals.movies_signals import after_movie_creation
+from usermovierecommend.signals.movies_signals import before_movie_deleted

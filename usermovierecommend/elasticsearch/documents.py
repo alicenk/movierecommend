@@ -9,3 +9,15 @@ class UserDocument:
             'surname': instance.surname,
             'email': instance.email
         }
+
+
+class MovieDocument:
+    index = 'movies'
+
+    @staticmethod
+    def document(instance):
+        return {
+            'id': instance.id,
+            'name': instance.name,
+            'type': instance.type
+        }
