@@ -8,7 +8,7 @@ class UserView(generics.CreateAPIView, generics.ListAPIView, generics.UpdateAPIV
         user_data = request.data
         created_user_data = UserService.create_user(user_data)
         return JsonResponse({
-            "message": "User Created",
+            "message": "User Creation Api",
             "user_data": created_user_data
         })
 

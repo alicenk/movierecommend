@@ -45,6 +45,7 @@ class UserService:
         return None
 
     @classmethod
+    @transaction.atomic
     def delete_user(cls, user_id):
         try:
             user = User.objects.get(id=user_id)
