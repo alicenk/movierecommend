@@ -1,10 +1,11 @@
-from elasticsearch_dsl import Document, Text
+class UserDocument:
+    index = 'users'
 
-
-class UserDocument(Document):
-    name = Text()
-    surname = Text()
-    email = Text()
-
-    class Index:
-        name = 'user_index'
+    @staticmethod
+    def document(instance):
+        return {
+            'id': instance.id,
+            'name': instance.name,
+            'surname': instance.surname,
+            'email': instance.email
+        }
