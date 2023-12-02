@@ -45,6 +45,7 @@ class MovieService:
         return None
 
     @classmethod
+    @transaction.atomic
     def delete_movie(cls, movie_id):
         try:
             movie = Movie.objects.get(id=movie_id)

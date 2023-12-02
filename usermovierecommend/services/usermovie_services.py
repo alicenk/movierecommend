@@ -11,9 +11,13 @@ class UserMovieServices:
     @staticmethod
     @transaction.atomic
     def create_usermovie(data):
-
-        user = User.objects.get(id=data.get('user_id'))
-        movie = Movie.objects.get(id=data.get('movie_id'))
+        try:
+            user = User.objects.get(id=data.get('user_id'))
+            movie = Movie.objects.get(id=data.get('movie_id'))
+        except User.DoesNotExist:
+            raise CustomNotFoundException(detail='User not found with the given ID.')
+        except Movie.DoesNotExist:
+            raise CustomNotFoundException(detail='Movie not found with the given ID.')
 
         existing_usermovie = UserMovie.objects.filter(
             user=data.get('user_id'),
@@ -33,3 +37,14 @@ class UserMovieServices:
             serializer.save()
             return serializer.data
         return {"error": "Invalid Data"}
+
+    @classmethod
+    @transaction.atomic
+    def delete_usermovie(cls, usermovie_id):
+        try:
+            usermovie = UserMovie.objects.get(id=usermovie_id)
+            usermovie.delete()
+            return True
+        except ObjectDoesNotExist:
+            return False
+

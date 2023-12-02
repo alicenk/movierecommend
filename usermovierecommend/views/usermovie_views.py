@@ -11,3 +11,14 @@ class UserMovieView(generics.CreateAPIView, generics.ListAPIView, generics.Updat
             "message": "User Movie Creation Api",
             "usermovie_data": created_usermovie_data
         })
+
+    def delete(self, request, *args, **kwargs):
+        usermovie_id = kwargs.get('usermovie_id')
+        if UserMovieServices.delete_usermovie(usermovie_id):
+            return JsonResponse({
+                "message": f"User Movie {usermovie_id} deleted"
+            })
+        else:
+            return JsonResponse({
+                "message": f"User Movie {usermovie_id} Not Found"
+            }, status=404)
