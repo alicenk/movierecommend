@@ -26,7 +26,7 @@ def after_movie_creation(sender, instance, created, **kwargs):
 
 
 @receiver(post_delete, sender=Movie)
-def before_movie_deleted(sender, instance, **kwargs):
+def after_movie_deleted(sender, instance, **kwargs):
     elasticsearch_manager = ElasticsearchManager()
     es_instance = elasticsearch_manager.instance
     es = es_instance.es

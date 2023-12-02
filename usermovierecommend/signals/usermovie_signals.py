@@ -1,21 +1,21 @@
 from django.db.models.signals import post_save
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
-from usermovierecommend.models.user import User
-from usermovierecommend.elasticsearch.documents import UserDocument
+from usermovierecommend.models.usermovie import UserMovie
+from usermovierecommend.elasticsearch.documents import UserMovieDocument
 from elasticsearch import Elasticsearch
 from usermovierecommend.elasticsearch.elasticsearch_manager import ElasticsearchManager
 
 
-@receiver(post_save, sender=User)
-def after_user_creation(sender, instance, created, **kwargs):
+@receiver(post_save, sender=UserMovie)
+def after_usermovie_creation(sender, instance, created, **kwargs):
     if created:
         elasticsearch_manager = ElasticsearchManager()
         es_instance = elasticsearch_manager.instance
         es = es_instance.es
 
-        user_document = UserDocument()
-        response = es.index(index=user_document.index, body=user_document.document(instance))
+        usermovie_document = UserMovieDocument()
+        response = es.index(index=usermovie_document.index, body=usermovie_document.document(instance))
 
         if response['result'] == 'created':
             print(f"Document Created Successfully Document ID: {response['_id']}")
@@ -25,19 +25,19 @@ def after_user_creation(sender, instance, created, **kwargs):
         print(f"Model updated: {instance.name}")
 
 
-@receiver(post_delete, sender=User)
-def after_user_deleted(sender, instance, **kwargs):
+@receiver(post_delete, sender=UserMovie)
+def after_usermovie_deleted(sender, instance, **kwargs):
     elasticsearch_manager = ElasticsearchManager()
     es_instance = elasticsearch_manager.instance
     es = es_instance.es
 
-    index_name = 'users'
-    user_id = instance.id
-    print(f"user id: {user_id}")
+    index_name = 'usermovies'
+    usermovie_id = instance.id
+
     query = {
         "query": {
             "match": {
-                "id": user_id
+                "id": usermovie_id
             }
         }
     }
@@ -46,7 +46,7 @@ def after_user_deleted(sender, instance, **kwargs):
         print(f"response: {response}")
         if response['total'] != 0:
             if response['deleted'] == 1:
-                print(f"Successfully deleted document from Elasticsearch. Document ID: {user_id}")
+                print(f"Successfully deleted document from Elasticsearch. Document ID: {usermovie_id}")
             else:
                 raise Exception()
     except Exception as e:
